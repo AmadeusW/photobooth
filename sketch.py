@@ -1,6 +1,7 @@
 import cv2
 import os
 import numpy
+import prototype
 
 def go():
     with os.scandir("source") as entries:
@@ -38,7 +39,43 @@ def processImage(sourcePath, outputPath):
     cv2.imwrite(outputPath+"t3e.jpg", t3e)
     cv2.imwrite(outputPath, sketch)
 
+def processImage(sourcePath, model):
+    sourceImage = cv2.imread(sourcePath)
+    greyImage = cv2.cvtColor(sourceImage,  cv2.COLOR_BGR2GRAY)
+    inverted = cv2.bitwise_not(greyImage)
+    blur = cv2.GaussianBlur(greyImage, (model.GetValue('blur'), model.GetValue('blur')), 0)
+    sketch = cv2.divide(greyImage, blur, scale = 256.0)
+
+    erosion = numpy.ones((model.GetValue('erosion'), model.GetValue('erosion')), numpy.uint8)
+    if (model.GetValue('erodeFirst')):
+        eroded = cv2.erode(sketch, erosion, iterations=1)
+        x, threshold = cv2.threshold(eroded, model.GetValue('thresholdValue'), 255, model.GetValue('thresholdType'))
+        return threshold
+    else:
+        x, threshold = cv2.threshold(sketch, model.GetValue('thresholdValue'), 255, model.GetValue('thresholdType'))
+        eroded = cv2.erode(threshold, erosion, iterations=1)
+        return eroded
+
+def play():
+    print(f"Play...")
+    cv2.namedWindow('Prototype', cv2.WINDOW_NORMAL)
+    model = prototype.PrototypeModel()
+    while True:
+        sketch = processImage("source/image7.jpg", model)
+        cv2.imshow('Prototype', sketch)
+        model.Dump()
+        key = cv2.waitKey(0);
+        print(f"...")
+        if (key == 27): #escape
+            print(f"Exit...")
+            model.Dump()
+            break
+        model.TryNavigate(chr(key))
+
+    cv2.destroyAllWindows()
+
 
 # TODO: normalize images so that the processing produces roughly the same result for various kinds of raw input
 
-go()
+#go()
+play()
