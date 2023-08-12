@@ -49,10 +49,10 @@ def processImage(model):
     erosion = numpy.ones((model['erosion'], model['erosion']), numpy.uint8)
     if (model['erodeFirst']):
         eroded = cv2.erode(sketch, erosion, iterations=1)
-        x, threshold = cv2.threshold(eroded, model['thresholdValue'], 255, model['thresholdType'])
+        _, threshold = cv2.threshold(eroded, model['thresholdValue'], 255, model['thresholdType'])
         return threshold
     else:
-        x, threshold = cv2.threshold(sketch, model['thresholdValue'], 255, model['thresholdType'])
+        _, threshold = cv2.threshold(sketch, model['thresholdValue'], 255, model['thresholdType'])
         eroded = cv2.erode(threshold, erosion, iterations=1)
         return eroded
 
