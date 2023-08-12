@@ -40,19 +40,19 @@ def processImage(sourcePath, outputPath):
     cv2.imwrite(outputPath, sketch)
 
 def processImage(model):
-    sourceImage = cv2.imread(model.GetValue('sourcePath'))
+    sourceImage = cv2.imread(model['sourcePath'])
     greyImage = cv2.cvtColor(sourceImage,  cv2.COLOR_BGR2GRAY)
     inverted = cv2.bitwise_not(greyImage)
-    blur = cv2.GaussianBlur(greyImage, (model.GetValue('blur'), model.GetValue('blur')), 0)
+    blur = cv2.GaussianBlur(greyImage, (model['blur'], model['blur']), 0)
     sketch = cv2.divide(greyImage, blur, scale = 256.0)
 
-    erosion = numpy.ones((model.GetValue('erosion'), model.GetValue('erosion')), numpy.uint8)
-    if (model.GetValue('erodeFirst')):
+    erosion = numpy.ones((model['erosion'], model['erosion']), numpy.uint8)
+    if (model['erodeFirst']):
         eroded = cv2.erode(sketch, erosion, iterations=1)
-        x, threshold = cv2.threshold(eroded, model.GetValue('thresholdValue'), 255, model.GetValue('thresholdType'))
+        x, threshold = cv2.threshold(eroded, model['thresholdValue'], 255, model['thresholdType'])
         return threshold
     else:
-        x, threshold = cv2.threshold(sketch, model.GetValue('thresholdValue'), 255, model.GetValue('thresholdType'))
+        x, threshold = cv2.threshold(sketch, model['thresholdValue'], 255, model['thresholdType'])
         eroded = cv2.erode(threshold, erosion, iterations=1)
         return eroded
 
@@ -64,7 +64,7 @@ def play():
         sketch = processImage(model)
         cv2.imshow('Prototype', sketch)
         model.Dump()
-        key = cv2.waitKey(0);
+        key = cv2.waitKey(0)
         print(f"...")
         if (key == 27): #escape
             print(f"Exit...")

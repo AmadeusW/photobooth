@@ -16,18 +16,19 @@ class PrototypeModel:
         for key, value in self.map.items():
             print(f"Key {key}, Value {value.GetValue()}")
 
-    def GetValue(self, key):
+   
+    def __getitem__(self, key):
         return self.map[key].GetValue()
     
     def TryNavigate(self, char):
         for key, value in self.map.items():
             if (value.keyPrevious == char):
                 value.SetIndex(value.index - 1)
-                print(f"Decrementing {key} to {self.GetValue(key)}")
+                print(f"Decrementing {key} to {self[key]}")
                 return True
             if (value.keyNext == char):
                 value.SetIndex(value.index + 1)
-                print(f"Incrementing {key} to {self.GetValue(key)}")
+                print(f"Incrementing {key} to {self[key]}")
                 return True
         print(f"Unknown gesture {char}")
         return False
@@ -49,4 +50,3 @@ class ModelData:
 
 model = PrototypeModel()
 model.Dump()
-print(f"Blur = {model.GetValue('blur')}")
