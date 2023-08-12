@@ -3,6 +3,7 @@ import cv2
 class PrototypeModel:
     def __init__(self):
         self.map = {
+            "sourcePath": ModelData(["source/image7.jpg"], 0, ['o', 'p']),
             "blur": ModelData([11, 21, 41, 61, 91, 121, 151], 5, ['q','w']),
             "erosion": ModelData([1, 2, 3, 4, 5, 6, 7], 1, ['a','s']),
             "thresholdType": ModelData([cv2.THRESH_TOZERO, cv2.THRESH_TOZERO + cv2.THRESH_OTSU, cv2.THRESH_BINARY + cv2.THRESH_OTSU, cv2.THRESH_BINARY], 1, ['z','x']),

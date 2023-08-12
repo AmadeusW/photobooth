@@ -39,8 +39,8 @@ def processImage(sourcePath, outputPath):
     cv2.imwrite(outputPath+"t3e.jpg", t3e)
     cv2.imwrite(outputPath, sketch)
 
-def processImage(sourcePath, model):
-    sourceImage = cv2.imread(sourcePath)
+def processImage(model):
+    sourceImage = cv2.imread(model.GetValue('sourcePath'))
     greyImage = cv2.cvtColor(sourceImage,  cv2.COLOR_BGR2GRAY)
     inverted = cv2.bitwise_not(greyImage)
     blur = cv2.GaussianBlur(greyImage, (model.GetValue('blur'), model.GetValue('blur')), 0)
@@ -61,7 +61,7 @@ def play():
     cv2.namedWindow('Prototype', cv2.WINDOW_NORMAL)
     model = prototype.PrototypeModel()
     while True:
-        sketch = processImage("source/image7.jpg", model)
+        sketch = processImage(model)
         cv2.imshow('Prototype', sketch)
         model.Dump()
         key = cv2.waitKey(0);
