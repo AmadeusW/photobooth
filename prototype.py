@@ -1,27 +1,25 @@
 import cv2
 
-class PrototypeModel:
-    def __init__(self):
-        self.map = {
-            "sourcePath": ModelData(["source/image2.jpg", "source/image3.jpg", "source/image4.jpg", "source/image5.jpg", "source/image6.jpg", "source/image7.jpg"], 5, ['o', 'p']),
-            "blur": ModelData([11, 21, 41, 61, 91, 121, 151], 5, ['q','w']),
-            "erosion": ModelData([1, 2, 3, 4, 5, 6, 7], 1, ['a','s']),
-            "thresholdType": ModelData([cv2.THRESH_TOZERO, cv2.THRESH_TOZERO + cv2.THRESH_OTSU, cv2.THRESH_BINARY + cv2.THRESH_OTSU, cv2.THRESH_BINARY], 1, ['z','x']),
-            "thresholdValue": ModelData([150, 175, 200, 210, 220, 230, 240, 250], 1, ['c','v']),
-            "erodeFirst": ModelData([False, True], 0, ['d','f']),
-        }
+class Model:
+    def __init__(self, dictionary):
+        if not isinstance(dictionary, dict):
+            raise TypeError("Parameter needs to be a dictionary")
+        for key, value in dictionary.items():
+            if not isinstance(value, Data):
+                raise TypeError("Dictionary value needs to be prototype.Data")
+        self.dictionary = dictionary
     
     def Dump(self):
         print("Model dump:")
-        for key, value in self.map.items():
+        for key, value in self.dictionary.items():
             print(f"Key {key}, Value {value.GetValue()}")
 
    
     def __getitem__(self, key):
-        return self.map[key].GetValue()
+        return self.dictionary[key].GetValue()
     
     def TryNavigate(self, char):
-        for key, value in self.map.items():
+        for key, value in self.dictionary.items():
             if (value.keyPrevious == char):
                 value.SetIndex(value.index - 1)
                 print(f"Decrementing {key} to {self[key]}")
@@ -33,7 +31,7 @@ class PrototypeModel:
         print(f"Unknown gesture {char}")
         return False
 
-class ModelData:
+class Data:
     def __init__(self, choices, index, navigationKeys):
         self.choices = choices
         self.index = index
@@ -48,5 +46,3 @@ class ModelData:
         self.index = max(min(newIndex, maxValue), 0)
         return self.index
 
-model = PrototypeModel()
-model.Dump()
