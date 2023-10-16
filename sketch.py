@@ -3,12 +3,6 @@ import os
 import numpy
 import prototype
 
-def go():
-    with os.scandir("source") as entries:
-        for entry in entries:
-            if entry.is_file():
-                processImage("source/" + entry.name, "out/" + entry.name)
-
 def processImage(model):
     sourceImage = cv2.imread(model['sourcePath'])
     greyImage = cv2.cvtColor(sourceImage,  cv2.COLOR_BGR2GRAY)
@@ -70,5 +64,4 @@ def play():
 
 # TODO: normalize images so that the processing produces roughly the same result for various kinds of raw input
 
-#go()
 play()
