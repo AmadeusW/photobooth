@@ -3,10 +3,7 @@ import cv2
 class Model:
     def __init__(self, dictionary):
         if not isinstance(dictionary, dict):
-            raise TypeError("Parameter needs to be a dictionary")
-        for key, value in dictionary.items():
-            if not isinstance(value, Data):
-                raise TypeError("Dictionary value needs to be prototype.Data")
+            raise TypeError("Parameter needs to be a dictionary of raw values or Data for prototyping support")
         self.dictionary = dictionary
     
     def Dump(self):
@@ -20,6 +17,8 @@ class Model:
     
     def TryNavigate(self, char):
         for key, value in self.dictionary.items():
+            if not isinstance(value, Data):
+                continue;
             if (value.keyPrevious == char):
                 value.SetIndex(value.index - 1)
                 print(f"Decrementing {key} to {self[key]}")
