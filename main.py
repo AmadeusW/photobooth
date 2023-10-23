@@ -8,7 +8,7 @@ c = CameraAdapter()
 filename = c.capture(directory)
 
 print(f"Processing {filename}")
-outname = "out.png"
+outname = "out.jpg"
 image = processor.processImageWithDefaultSettings(directory, filename, outname)
 
 print(f"Wrote {directory}/{outname}")
