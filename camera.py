@@ -1,4 +1,4 @@
-from picamera import PiCamera
+import PiCamera
 import time
 
 class CameraAdapter:
@@ -15,10 +15,3 @@ class CameraAdapter:
         self.camera.capture(filename)
         print(f"Done!")
         return filename
-
-# todo: return the filepath from this method
-
-# another file: send to printer
-
-# another file: reada button press and launch all other files!
-# then, all done :)

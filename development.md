@@ -13,5 +13,5 @@ Use keys `q w a s d f z x c v o p` to change model variables and update the prev
 # Using the main photobooth
 `python main.py`
 
-# Todo
-Let model be either a simple dictionary or dictionary of Data (tweakable as prototype)
+# On Raspberry Pi
+`source env/bin/activate`
