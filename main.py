@@ -3,15 +3,16 @@ from print import PrinterAdapter
 import processor
 
 print(f"Taking a photo")
+directory = "/home/ama/Pictures/"
 c = CameraAdapter()
-filename = c.capture()
+filename = c.capture(directory)
 
 print(f"Processing {filename}")
-outname = "source/out.png"
-image = processor.processImageWithDefaultSettings(filename, outname)
+outname = "out.png"
+image = processor.processImageWithDefaultSettings(directory, filename, outname)
 
-print(f"Wrote {outname}")
+print(f"Wrote {directory}/{outname}")
 
-print(f"Printing {outname}")
+print(f"Printing {directory}/{{outname}")
 #commandLine = f"lp -d \"Brother_HL_L2350DW_series\" {outname}"
-PrinterAdapter().print(outname)
+PrinterAdapter().print(directory, outname)

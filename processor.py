@@ -2,9 +2,9 @@ import cv2
 import numpy
 import prototype
 
-def processImageWithDefaultSettings(source, target):
+def processImageWithDefaultSettings(directory, source, target):
     model = {
-            "sourcePath": source,
+            "sourcePath": f"{directory}/{source}",
             "blur": 121,
             "erosion": 1,
             "thresholdType": cv2.THRESH_TOZERO + cv2.THRESH_OTSU,
@@ -12,7 +12,7 @@ def processImageWithDefaultSettings(source, target):
             "erodeFirst": False,
         }
     image = processImage(model)
-    cv2.imwrite(target, image)
+    cv2.imwrite(f"{directory}/{target}", image)
 
 def processImage(model):
     sourceImage = cv2.imread(model['sourcePath'])

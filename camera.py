@@ -8,8 +8,8 @@ class CameraAdapter:
         self.camera.vflip = True
         self.camera.contrast = 10
     
-    def capture(self):
-        filename = f"/home/ama/Pictures/img{str(time.time())}.jpg"
+    def capture(self, directory):
+        filename = f"{directory}/img{str(time.time())}.jpg"
         print(f"Capturing photo to {filename}")
         time.sleep(1)
         self.camera.capture(filename)
