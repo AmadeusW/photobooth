@@ -9,9 +9,9 @@ class CameraAdapter:
         self.camera.contrast = 10
     
     def capture(self, directory):
-        filename = f"{directory}/img{str(time.time())}.jpg"
-        print(f"Capturing photo to {filename}")
+        filename = f"img{str(time.time())}.jpg"
+        print(f"Capturing photo to {directory}/{filename}")
         time.sleep(1)
-        self.camera.capture(filename)
+        self.camera.capture(f"{directory}/{filename}")
         print(f"Done!")
         return filename
