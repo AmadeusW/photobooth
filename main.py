@@ -1,9 +1,9 @@
-from camera import camera
+from camera import CameraAdapter
 from print import PrinterAdapter
 import processor
 
 print(f"Taking a photo")
-c = camera.CameraAdapter()
+c = CameraAdapter()
 filename = c.capture()
 
 print(f"Processing {filename}")
