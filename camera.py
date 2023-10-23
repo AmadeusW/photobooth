@@ -1,9 +1,9 @@
-import PiCamera
+import picamera
 import time
 
 class CameraAdapter:
     def __init__(self):
-        self.camera = PiCamera()
+        self.camera = picamera.PiCamera()
         self.camera.resolution = (1280, 720)
         self.camera.vflip = True
         self.camera.contrast = 10
