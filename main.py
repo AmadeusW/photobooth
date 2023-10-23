@@ -3,7 +3,7 @@ from print import PrinterAdapter
 import processor
 
 print(f"Taking a photo")
-directory = "/home/ama/Pictures/"
+directory = "/home/ama/Pictures"
 c = CameraAdapter()
 filename = c.capture(directory)
 
