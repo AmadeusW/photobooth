@@ -13,6 +13,6 @@ image = processor.processImageWithDefaultSettings(directory, filename, outname)
 
 print(f"Wrote {directory}/{outname}")
 
-print(f"Printing {directory}/{{outname}")
+print(f"Printing {directory}/{outname}")
 #commandLine = f"lp -d \"Brother_HL_L2350DW_series\" {outname}"
 PrinterAdapter().print(directory, outname)
