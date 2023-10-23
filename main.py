@@ -1,15 +1,13 @@
-#from camera import camera
+from camera import camera
 from print import PrinterAdapter
 import processor
 
-#print(f"Taking a photo")
-#c = camera.CameraAdapter()
-#filename = c.capture()
+print(f"Taking a photo")
+c = camera.CameraAdapter()
+filename = c.capture()
 
-filename = "source/image3.jpg"
-outname = "source/out.png"
-# TODO: validate if file exists
 print(f"Processing {filename}")
+outname = "source/out.png"
 image = processor.processImageWithDefaultSettings(filename, outname)
 
 print(f"Wrote {outname}")
