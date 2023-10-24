@@ -1,18 +1,22 @@
 from camera import CameraAdapter
 from print import PrinterAdapter
 import processor
+import time
 
-print(f"Taking a photo")
 directory = "/home/ama/Pictures"
+currentTime = time.time().strftime("%Y%m%dT%H%M%S");
+input = f"img{currentTime}.jpg"
+output = f"out{currentTime}.jpg"
+inputPath = f"{directory}/{input}";
+outputPath = f"{directory}/{output}";
+
+print(f"Photobooth @ {currentTime}")
+print(f"Taking a photo")
 c = CameraAdapter()
-filename = c.capture(directory)
+filename = c.capture(inputPath)
 
-print(f"Processing {filename}")
-outname = "out.jpg"
-image = processor.processImageWithDefaultSettings(directory, filename, outname)
+print(f"Processing {inputPath}")
+image = processor.processImageWithDefaultSettings(inputPath, outputPath)
 
-print(f"Wrote {directory}/{outname}")
-
-print(f"Printing {directory}/{outname}")
-#commandLine = f"lp -d \"Brother_HL_L2350DW_series\" {outname}"
-PrinterAdapter().print(directory, outname)
+print(f"Printing {outputPath}")
+PrinterAdapter().print(outputPath)

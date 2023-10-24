@@ -1,5 +1,4 @@
 import picamera
-import time
 
 class CameraAdapter:
     def __init__(self):
@@ -8,10 +7,8 @@ class CameraAdapter:
         self.camera.vflip = True
         self.camera.contrast = 10
     
-    def capture(self, directory):
-        filename = f"img{str(time.time())}.jpg"
-        print(f"Capturing photo to {directory}/{filename}")
-        time.sleep(1)
-        self.camera.capture(f"{directory}/{filename}")
+    def capture(self, path):
+        print(f"Capturing photo to {path}")
+        self.camera.capture(f"{path}")
         print(f"Done!")
-        return filename
+        return
