@@ -4,7 +4,7 @@ import processor
 import time
 
 directory = "/home/ama/Pictures"
-currentTime = time.time().strftime("%Y%m%dT%H%M%S");
+currentTime = time.strftime("%Y%m%dT%H%M%S");
 input = f"img{currentTime}.jpg"
 output = f"out{currentTime}.jpg"
 inputPath = f"{directory}/{input}";
