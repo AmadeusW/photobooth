@@ -24,8 +24,8 @@ https://pyimagesearch.com/2018/09/19/pip-install-opencv/
 
 # Hardware
 GPIO4 - LED power
-GPIO14 - button sense
-also: 3v3 button power
+GPIO14 - button sense (assumes internal pullup)
+also: gnd button ground
 also: gnd LED ground
 
 # todo

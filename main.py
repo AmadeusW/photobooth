@@ -9,8 +9,12 @@ button = Button(gpioButton)
 
 def onPress():
     led.off()
-    photobooth.takePhoto()
-    led.on()
+    try:
+        photobooth.takePhoto()
+        led.on()
+    except Exception as e:
+        led.blink(0.3, 0.3, 5)
+        print(f"Error taking photo: {e}")
 
 led.on()
 button.when_pressed = onPress
