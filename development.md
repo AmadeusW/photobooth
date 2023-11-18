@@ -22,6 +22,10 @@ https://pyimagesearch.com/2018/09/19/pip-install-opencv/
 `pip install "picamera[array]"`
 `source env/bin/activate`
 
+# Raspberry Pi - auto start
+Run `crontab -e` and add the following
+`@reboot /home/pi/photobooth/startup.sh`
+
 # Hardware
 GPIO4 - LED power
 GPIO14 - button sense (assumes internal pullup)
