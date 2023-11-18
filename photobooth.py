@@ -13,8 +13,7 @@ def takePhoto():
 
     print(f"Photobooth @ {currentTime}")
     print(f"Taking a photo")
-    c = CameraAdapter()
-    filename = c.capture(inputPath)
+    filename = CameraAdapter.capture(inputPath)
 
     print(f"Processing {inputPath}")
     image = processor.processImageWithDefaultSettings(inputPath, outputPath)
