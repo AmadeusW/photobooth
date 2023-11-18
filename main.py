@@ -13,8 +13,8 @@ def onPress():
         photobooth.takePhoto()
         led.on()
     except Exception as e:
-        led.blink(0.3, 0.3, 5)
         print(f"Error taking photo: {e}")
+        led.blink(0.3, 0.3)
 
 led.on()
 button.when_pressed = onPress
