@@ -1,22 +1,21 @@
-from camera import CameraAdapter
-from print import PrinterAdapter
-import processor
-import time
+from gpiozero import LED, Button
+from signal import pause
+import photobooth
 
-directory = "/home/ama/Pictures"
-currentTime = time.strftime("%Y%m%dT%H%M%S");
-input = f"img{currentTime}.jpg"
-output = f"out{currentTime}.jpg"
-inputPath = f"{directory}/{input}";
-outputPath = f"{directory}/{output}";
+# Define the GPIO pin number you want to use
+gpioLed = 4
+gpioButton = 14
 
-print(f"Photobooth @ {currentTime}")
-print(f"Taking a photo")
-c = CameraAdapter()
-filename = c.capture(inputPath)
+# Create an LED object for the specified GPIO pin
+led = LED(gpioLed)
+button = Button(gpioButton)
 
-print(f"Processing {inputPath}")
-image = processor.processImageWithDefaultSettings(inputPath, outputPath)
+led.on()
+button.when_pressed = onPress
 
-print(f"Printing {outputPath}")
-PrinterAdapter().print(outputPath)
+def onPress():
+    led.off()
+    photobooth.takePhoto()
+    led.on()
+
+pause()
